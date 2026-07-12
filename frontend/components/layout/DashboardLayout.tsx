@@ -4,6 +4,8 @@ import { MetricCard } from "../cards/MetricCard";
 import { Cpu, HardDrive, MemoryStick, Wifi } from "lucide-react";
 import { CpuChart } from "../charts/CpuChart";
 import { MemoryChart } from "../charts/MemoryChart";
+import { ServiceTable } from "../tables/ServiceTable";
+import { LogsPanel } from "../dashboard/LogsPanel";
 
 export function DashboardLayout() {
   return (
@@ -61,8 +63,9 @@ export function DashboardLayout() {
             <MemoryChart />
           </div>
 
-          <div className="mt-8 rounded-xl border h-72 flex items-center justify-center">
-            Recent Logs
+          <div className="mt-8 grid gap-6 lg:grid-cols-2">
+            <ServiceTable />
+            <LogsPanel />
           </div>
         </main>
       </div>
