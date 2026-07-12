@@ -2,6 +2,8 @@ import { AppSidebar } from "./Sidebar";
 import { TopHeader } from "./Header";
 import { MetricCard } from "../cards/MetricCard";
 import { Cpu, HardDrive, MemoryStick, Wifi } from "lucide-react";
+import { CpuChart } from "../charts/CpuChart";
+import { MemoryChart } from "../charts/MemoryChart";
 
 export function DashboardLayout() {
   return (
@@ -55,13 +57,8 @@ export function DashboardLayout() {
           </div>
 
           <div className="mt-8 grid gap-6 lg:grid-cols-2">
-            <div className="rounded-xl border h-96 flex items-center justify-center">
-              CPU Chart
-            </div>
-
-            <div className="rounded-xl border h-96 flex items-center justify-center">
-              Memory Chart
-            </div>
+            <CpuChart />
+            <MemoryChart />
           </div>
 
           <div className="mt-8 rounded-xl border h-72 flex items-center justify-center">
