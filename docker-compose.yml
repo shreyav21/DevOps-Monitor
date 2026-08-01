@@ -1,0 +1,51 @@
+services:
+
+  postgres:
+    image: postgres:16
+    container_name: devops-postgres
+    restart: unless-stopped
+
+    environment:
+      POSTGRES_DB: devops_monitor
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/devops_monitor
+
+    ports:
+      - "5433:5432"
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  backend:
+    build:
+      context: ./backend
+
+    container_name: devops-backend
+
+    depends_on:
+      - postgres
+
+    environment:
+      DB_PASSWORD: ${DB_PASSWORD}
+
+    ports:
+      - "8080:8080"
+
+  frontend:
+    build:
+      context: ./frontend
+
+    container_name: devops-frontend
+
+    depends_on:
+      - backend
+
+    ports:
+      - "3000:3000"
+
+    environment:
+      NEXT_PUBLIC_API_URL: http://backend:8080/api
+
+volumes:
+  postgres_data:

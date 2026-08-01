@@ -1,6 +1,8 @@
 package com.devopsmonitor.backend.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDateTime;
 
@@ -52,6 +54,7 @@ public class ServiceStatus {
         this.status = status;
     }
 
+    @NotNull
     public Double getCpuUsage() {
         return cpuUsage;
     }
@@ -60,6 +63,7 @@ public class ServiceStatus {
         this.cpuUsage = cpuUsage;
     }
 
+    @Min(0)
     public Double getMemoryUsage() {
         return memoryUsage;
     }

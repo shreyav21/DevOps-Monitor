@@ -3,9 +3,18 @@ spring:
     name: backend
 
   datasource:
-    url: jdbc:postgresql://localhost:5433/devops_monitor
+    url: jdbc:postgresql://postgres:5432/devops_monitor
     username: postgres
     password: ${DB_PASSWORD}
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: devops-frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
 
   jpa:
     hibernate:

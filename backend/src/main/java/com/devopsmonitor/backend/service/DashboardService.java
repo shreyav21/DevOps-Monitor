@@ -3,6 +3,7 @@ package com.devopsmonitor.backend.service;
 import com.devopsmonitor.backend.dto.DashboardHistoryDto;
 import com.devopsmonitor.backend.dto.DashboardSummaryDto;
 import com.devopsmonitor.backend.entity.Metric;
+import com.devopsmonitor.backend.exception.ResourceNotFoundException;
 import com.devopsmonitor.backend.repository.MetricRepository;
 import org.springframework.stereotype.Service;
 import com.devopsmonitor.backend.dto.AlertResponseDto;
@@ -34,7 +35,7 @@ public class DashboardService {
 
         Metric latestMetric = metricRepository
                 .findTopByOrderByCreatedAtDesc()
-                .orElseThrow(() -> new RuntimeException("No metrics found"));
+                .orElseThrow(() -> new ResourceNotFoundException("No metrics found"));
 
         DashboardSummaryDto summary = new DashboardSummaryDto();
 
