@@ -7,15 +7,6 @@ spring:
     username: postgres
     password: ${DB_PASSWORD}
 
-  frontend:
-    build:
-      context: ./frontend
-    container_name: devops-frontend
-    ports:
-      - "3000:3000"
-    depends_on:
-      - backend
-
   jpa:
     hibernate:
       ddl-auto: update
@@ -28,6 +19,30 @@ spring:
 
   flyway:
     enabled: false
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+
+  endpoint:
+    health:
+      show-details: always
+  metrics:
+    tags:
+      application: devops-monitor
+  prometheus:
+    metrics:
+      export:
+        enabled: true
+
+info:
+  app:
+    name: DevOps-Monitor
+    version: 1.0.0
+    description: DevOps Monitoring Dashboard
 
 server:
   port: 8080
